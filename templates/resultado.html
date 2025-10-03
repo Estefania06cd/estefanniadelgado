@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de tu Vocación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>Tu Viaje a la Medicina 🧬</h1>
+    </header>
+    
+    <main class="container">
+        <section id="resultado" class="section resultado-bg">
+            <h2 class="tema-principal">¡Tu Vocación ha sido Evaluada! 🎉</h2>
+            <div id="mensaje-resultado">
+                <h3>Felicidades, **{{ prefijo }} {{ nombre }}**</h3>
+                <p class="frase-medicina">
+                    Has demostrado compromiso con tu futura carrera de **{{ carrera }}**.
+                </p>
+                
+                <div class="score-box">
+                    <p>Puntuación Total Obtenida:</p>
+                    <span class="score-value">{{ score }} / {{ max_score }}</span>
+                </div>
+                
+                {% set porcentaje = (score / max_score) %}
+                
+                {% if porcentaje >= 0.8 %}
+                    <p class="motivacion alto">**¡Excelente Aptitud!** Tu vocación y valores son sobresalientes. Estás listo/a para el desafío. El campo de la salud te espera.</p>
+                {% elif porcentaje >= 0.5 %}
+                    <p class="motivacion medio">**Base Sólida.** Tienes buen potencial. Recuerda fortalecer tu conocimiento ético y tu resiliencia. ¡Sigue adelante!</p>
+                {% else %}
+                    <p class="motivacion bajo">**Áreas de Oportunidad.** La Medicina exige profunda ética y compromiso. Te recomendamos reflexionar si esta es tu verdadera vocación. ¡No te rindas, pero evalúa tu motivación a fondo!</p>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('home') }}" class="nav-button">Volver al Inicio y Repetir Evaluación</a>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 Vocación al Servicio | Desarrollo con Flask y amor por la Medicina.</p>
+    </footer>
+</body>
+</html>
